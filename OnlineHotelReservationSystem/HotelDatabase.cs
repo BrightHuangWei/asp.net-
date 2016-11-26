@@ -51,6 +51,11 @@
         /// </summary>
         public int SysAdminId { get; set; }
         /// <summary>
+        /// 注册校验码
+        /// </summary>
+        [Required]
+        public string SysAdminIdCode { get; set; }
+        /// <summary>
         /// 管理员名
         /// </summary>
         [Required]

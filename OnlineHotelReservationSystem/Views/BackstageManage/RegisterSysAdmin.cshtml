@@ -1,0 +1,100 @@
+﻿
+@{
+    Layout = null;
+}
+@model OnlineHotelReservationSystem.Models.SysAdmin
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册KEMPINSKI后台管理账户</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index","Home")"><img src="~/Content/images/corp-logo.png" height="50" /></a>
+                @*@Html.ActionLink("Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li>@Html.ActionLink("目的地", "About", "Home")</li>
+                    <li>@Html.ActionLink("预定房间", "Index", "Home")</li>
+                    <li>@Html.ActionLink("最新优惠", "About", "Home")</li>
+                    <li>@Html.ActionLink("关于凯宾斯基", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("凯宾斯基博客", "Contact", "Home")</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br /><br /><br />
+    <div class="container">
+        @using (Html.BeginForm("RegisterSysAdminSave", "BackstageManage", FormMethod.Post,new { @class= "form-horizontal" }))
+        {
+            <h4>注册KEMPINSKI后台管理账户</h4>
+            <hr />
+            <br /><br />
+            <div class="form-group">
+                @Html.Label("登录名", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SysAdminName, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.Label("密码", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.SysAdminPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.Label("确认密码", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.SysAdminPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            @*<div class="form-group">
+                @Html.Label("内部识别码", new { @class = "col-md-2 control-label" , placeholder="输入分配的校验码" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SysAdminIdCode, new { @class = "form-control" })
+                </div>
+            </div>*@
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="注册" class="btn btn-default" /> &nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+
+
+    <div class="container body-content">
+        <hr />
+        <br />
+        <footer class="text-center" style="position: relative;margin-top: -30px; height: 30px;clear:both; ">
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

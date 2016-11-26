@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+@model OnlineHotelReservationSystem.Models.SysAdmin
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录到KEMPINSKI后台</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    
+
+    <div class="container">
+        @using (Html.BeginForm("LoginSysAdminSave", "BackstageManage"))
+            {
+            @Html.AntiForgeryToken()
+            <h4>登录到KEMPINSKI后台</h4>
+            <hr />
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <span class="col-md-2 control-label">登录名</span>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SysAdminName, new { @class = "form-control" })
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">密码</span>
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.SysAdminPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="登录" class="btn btn-default" /> &nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("注册为管理员", "RegisterSysAdmin", "BackstageManage")
+                </div>
+            </div>
+        }
+
+    </div>
+</body>
+</html>
