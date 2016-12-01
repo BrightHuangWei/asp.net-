@@ -155,6 +155,15 @@ namespace OnlineHotelReservationSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    var db = new HotelDatabase();
+                    db.Database.CreateIfNotExists();
+                    var customer = new Customer();
+                    customer.CustomerName = model.Email;
+                    customer.CustomerLevel = "普通用户";
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // 有关如何启用帐户确认和密码重置的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=320771

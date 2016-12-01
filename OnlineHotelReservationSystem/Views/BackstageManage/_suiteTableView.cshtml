@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+    var suitedata = ViewBag.SuiteData as List<Suite>;
+}
+
+<table class="table table-hover">
+    <caption>已存在的房型信息</caption>
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>房间类型</th>
+            <th>房间价格</th>
+            <th>房间总数</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (suitedata != null)
+        {
+            foreach (var item in suitedata)
+            {
+                <tr>
+                    <td> @item.SuiteId</td>
+                    <td> @item.SuiteType</td>
+                    <td> @item.SuitePrice</td>
+                    <td> @item.TotalNumber</td>
+                    <td>
+                        @Html.ActionLink("[  编辑  ]", "", new { SuiteId = item.SuiteId }) |
+                        @Html.ActionLink("[  删除  ]", "SuiteDelete", new { SuiteId = item.SuiteId })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>没有数据</td>
+                <td>没有数据</td>
+                <td>没有数据</td>
+                <td>没有数据</td>
+                <td>无法执行</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <script type="text/javascript">
+        function upclick(o) {
+            var SuiteType = $("#SuiteType").val();
+            var SuitePrice = $("#SuitePrice").val();
+            var TotalNumber = $("#TotalNumber").val();
+            alert(obj);
+            $.ajax({
+                url: @Html.ActionLink("SuiteList","Ajax"),
+                type: "GET",
+                dataType: "json",
+                data: { "SuiteType":SuiteType,"SuitePrice":SuitePrice,"TotalNumber":TotalNumber},
+                success: function (data) {
+
+                    alert(data);
+                }
+            })
+        }
+    </script>

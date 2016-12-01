@@ -1,0 +1,114 @@
+﻿
+@{
+    Layout = null;
+}
+@model ReserveInfo
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改订单 - 后台管理系统</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container">
+
+        <h2 class="h2 text-center">KEMPINSKI后台管理系统</h2>
+        <br />
+        <p>管理员：<label class="text-danger"> @ViewData["sysname"] </label> , 你好！</p>
+        <br /><br />
+        <ul id="myTab" class="nav nav-tabs">
+
+            <li>
+                @Html.ActionLink("退出系统", "LoginSysAdminExit", "BackstageManage", new { name = @ViewData["sysname"] })
+            </li>
+            <li>
+                @Html.ActionLink("订单管理", "OrderListIndex", "BackstageManage", new { })
+            </li>
+            <li>
+                @Html.ActionLink("用户管理", "UserIndex", "BackstageManage", new { })
+            </li>
+            <li>
+                @Html.ActionLink("房型管理", "SuiteIndex", "BackstageManage", new { })
+            </li>
+        </ul>
+        <br /> <br />
+
+        @using (Html.BeginForm("OrderListEditSave", "BackstageManage", new { @class = "form-horizontal" }))
+        {
+            <input type="hidden" value="@Model.OrderId" name="OrderId" />
+            <input type="hidden" value="@Model.UserName" name="UserName" />
+            <div class="form-group">
+                <span class="col-md-2 control-label">房间类型</span>
+                <div class="col-md-10">
+                    <label>@Model.SuiteType</label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">预定数量</span>
+                <div class="col-md-10">
+                    <label>@Model.OrderNunber</label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">预定时间</span>
+                <div class="col-md-10">
+                    <label>@Model.OrderTime</label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">预订人</span>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.OrderName, new { @class = "form-control" })
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">身份证号</span>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.OrderIdCard, new { @class = "form-control" })
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">联系电话</span>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Tel, new { @class = "form-control" })
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">入住时间</span>
+                <div class="col-md-10">
+                    <label class="control-label">@Model.ArrivalTime</label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">退房时间</span>
+                <div class="col-md-10">
+                    <label class="control-label">@Model.LeaveTime</label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <span class="col-md-2 control-label">总价</span>
+                <div class="col-md-10">
+                    <label class="text-danger">@Model.TotalPrice 元</label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="确认并保存" class="btn btn-danger" /> 
+                </div>
+            </div>
+
+        }
+    </div>
+</body>
+</html>

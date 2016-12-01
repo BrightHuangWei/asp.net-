@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+    var suitedata = ViewBag.SuiteData as List<Suite>;
+}
+@model Suite
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>主页 - 后台管理系统</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+
+
+
+
+<body>
+    <div class="container">
+
+        <h2 class="h2 text-center">KEMPINSKI后台管理系统</h2>
+        <br />
+        管理员： 你好！
+        <br /><br />
+        <ul id="myTab" class="nav nav-tabs">
+
+            <li>
+                @Html.ActionLink("退出系统", "LoginSysAdmin", "BackstageManage")
+            </li>
+            <li>
+                <a href="#orderList" data-toggle="tab">订单管理</a>
+            </li>
+            <li>
+                <a href="#user" data-toggle="tab">用户管理</a>
+            </li>
+            <li>
+                <a href="#add" data-toggle="tab">添加房型</a>
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+
+            <div class="tab-pane fade in active" id="orderList">
+                <br /><br />
+                <div id="orderListDiv">
+                    @Html.Partial("_orderListTableView");
+                </div>
+                <br /><br />
+                @using (Html.BeginForm("","",new { }))
+                {
+
+                }
+             </div>
+            <div class="tab-pane fade" id="user">
+                <br /><br />
+                <div id="orderListDiv">
+                    @Html.Partial("_userTableView");
+                </div>
+                <br /><br />
+                @using (Html.BeginForm("", "", new { }))
+                {
+
+                }
+            </div>
+
+        <div class="tab-pane fade" id="add">
+
+            <br /><br />
+            <div id="suiteDiv">
+                @Html.Partial("_suiteTableView")
+            </div>
+
+
+            <br /><br />
+
+            @using (Ajax.BeginForm("AddSuite", "BackstageManage", new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "suiteDiv", InsertionMode = InsertionMode.Replace }))
+            {
+
+                <div class="form-group">
+                    <label for="SuiteType" class="col-sm-2 control-label">房间类型</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(o => o.SuiteType, new { @class = "form-control", id = "SuiteType" })
+                    </div>
+                </div>
+                    <br /><br /><br />
+                    <div class="form-group">
+                        <label for="SuitePrice" class="col-sm-2 control-label">房间价格</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(o => o.SuitePrice, new { @class = "form-control", id = "SuitePrice" })
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="form-group">
+                        <label for="TotalNumber" class="col-sm-2 control-label">房间总数</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(o => o.TotalNumber, new { @class = "form-control", id = "TotalNumber" })
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="form-group">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-5">
+                            <input type="submit" class="btn btn-default" value="保存" onclick="javascript:upclick(this);" />
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            $('#myTab li:eq(1) a').tab('show');
+        });
+    </script>
+
+</body>
+</html>

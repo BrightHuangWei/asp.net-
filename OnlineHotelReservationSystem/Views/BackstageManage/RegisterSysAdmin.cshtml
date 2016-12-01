@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-@model OnlineHotelReservationSystem.Models.SysAdmin
+@model SysAdmin
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +50,7 @@
                 @Html.Label("登录名", new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.SysAdminName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SysAdminName)
                 </div>
             </div>
             <br />
@@ -60,23 +61,25 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
-                @Html.Label("确认密码", new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(m => m.SysAdminPassword, new { @class = "form-control" })
-                </div>
-            </div>
-            <br />
             @*<div class="form-group">
-                @Html.Label("内部识别码", new { @class = "col-md-2 control-label" , placeholder="输入分配的校验码" })
+        @Html.Label("确认密码", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.SysAdminPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />*@
+            <div class="form-group">
+                @Html.Label("内部识别码", new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.SysAdminIdCode, new { @class = "form-control" })
                 </div>
-            </div>*@
+            </div>
+            <br />
             <br />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="注册" class="btn btn-default" /> &nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("前去登录", "LoginSysAdmin", "BackstageManage")
                 </div>
             </div>
         }

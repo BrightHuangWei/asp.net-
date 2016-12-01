@@ -2,7 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
     <!--幻灯片 -->
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -39,14 +38,14 @@
     <div class="row">
         <div class="col-md-1">1qweq</div>
 
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <div class="thumbnail" style="border:none;">
                             <img class="img-rounded" src="~/Content/images/img4.jpg" alt="单人间">
                             <div class="caption">
-                                <h3>缩略图标签</h3>
+                                <h3>单人间</h3>
                                 <p>一些示例文本。一些示例文本。</p>
                             </div>
                         </div>
@@ -55,7 +54,7 @@
                         <div class="thumbnail" style="border:none;">
                             <img class="img-rounded" src="~/Content/images/img5.jpg" alt="双人间">
                             <div class="caption">
-                                <h3>缩略图标签</h3>
+                                <h3>双人间</h3>
                                 <p>一些示例文本。一些示例文本。</p>
                             </div>
                         </div>
@@ -71,7 +70,7 @@
                         <div class="thumbnail" style="border:none;">
                             <img class="img-rounded" src="~/Content/images/img5.jpg" alt="豪华套房">
                             <div class="caption">
-                                <h3>缩略图标签</h3>
+                                <h3>豪华套房</h3>
                                 <p>一些示例文本。一些示例文本。</p>
                             </div>
                         </div>
@@ -80,7 +79,7 @@
                         <div class="thumbnail" style="border:none;">
                             <img class="img-rounded" src="~/Content/images/img4.jpg" alt="总统套房">
                             <div class="caption">
-                                <h3>缩略图标签</h3>
+                                <h3>总统套房</h3>
                                 <p>一些示例文本。一些示例文本。</p>
                             </div>
                         </div>
@@ -90,62 +89,79 @@
 
         </div>
 
-        <br />
-        <br />
-        <br />
-        
 
-        <div class="col-md-3 table-bordered">
-            @*<form class="form-horizontal" role="form">*@
+        <div class="col-md-4 ">
             <h2 class="h2">预定您的房间</h2>
             <br />
-            @using (Html.BeginForm("", ""))
-            {
+            <form method="post" action="@Url.Action("OrderSave", "BackstageManage")" class="form-horizontal" role="form">
+
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label for="SuiteType" class="col-sm-2 control-label">房间类型</label>
                     <div class="col-sm-10">
-                        @*<input type="password" class="form-control" id="inputPassword3" />*@
-                        @Html.TextBox("wq", "12", new { @class = "form-control" })
+                        <select class="form-control" name="SuiteType">
+                            <option value="单人间">单人间</option>
+                            <option value="双人间">双人间</option>
+                            <option value="豪华套房">豪华套房</option>
+                            <option value="总统套房">总统套房</option>
+                        </select>
                     </div>
                 </div>
+                <br /><br /><br />
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <label for="OrderNunber" class="col-sm-2 control-label">预订数量</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword3" />
+                        @*<select class="form-control" name="OrderNunber">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>*@
+                        <input name="OrderNunber" type="number" value="" max="4" min="1" class="form-control" />
                     </div>
                 </div>
+                <br /><br />
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label for="ArrivalTime" class="col-sm-2 control-label">到店时间</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" />
+                        <input type="date" class="form-control" name="ArrivalTime" />
                     </div>
                 </div>
+                <br /><br />
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label for="LeaveTime" class="col-sm-2 control-label">离店时间</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" />
+                        <input type="date" class="form-control" name="LeaveTime"/>
                     </div>
                 </div>
+                <br /><br />
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label for="OrderName" class="col-sm-2 control-label">预订人</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" />
+                        <input type="text" class="form-control" name="OrderName" />
                     </div>
                 </div>
+                <br /><br />
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label for="OrderIdCard" class="col-sm-2 control-label">身份证号</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" />
+                        <input type="text" class="form-control" name="OrderIdCard" />
                     </div>
                 </div>
+                <br /><br />
+                <div class="form-group">
+                    <label for="Tel" class="col-sm-2 control-label">联系电话</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" name="Tel" />
+                    </div>
+                </div>
+                <br /><br />
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Sign in</button>
+                        <button type="submit" class="btn btn-info">预订</button>
                     </div>
                 </div>
-            }
+            </form>
         </div>
-
+        
         <div class="col-md-1">123</div>
-
     </div>

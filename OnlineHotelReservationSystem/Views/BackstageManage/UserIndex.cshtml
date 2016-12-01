@@ -1,0 +1,107 @@
+﻿
+@{
+    Layout = null;
+    var customerData = ViewBag.CustomerData as List<Customer>;
+}
+@model Customer
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户管理 - 后台管理系统</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+
+
+
+
+<body>
+    <div class="container">
+
+        <h2 class="h2 text-center">KEMPINSKI后台管理系统</h2>
+        <br />
+        <p>管理员：<label class="text-danger"> @ViewData["sysname"] </label> , 你好！</p>
+        <br />
+        <ul id="myTab" class="nav nav-tabs">
+
+            <li>
+                @Html.ActionLink("退出系统", "LoginSysAdminExit", "BackstageManage", new { name = ViewData["sysname"] })
+            </li>
+            <li>
+                @Html.ActionLink("订单管理", "OrderListIndex", "BackstageManage", new { })
+            </li>
+            <li>
+                @Html.ActionLink("用户管理", "UserIndex", "BackstageManage", new { })
+            </li>
+            <li>
+                @Html.ActionLink("房型管理", "SuiteIndex", "BackstageManage", new { })
+            </li>
+        </ul>
+        <br /> <br />
+        <div class="tab-pane fade in active" id="add">
+
+            <br />
+            <div id="suiteDiv">
+                <table class="table table-hover">
+                    <caption>已存在的用户</caption>
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>用户名</th>
+                            <th>用户等级</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (customerData != null)
+                        {
+                            foreach (var item in customerData)
+                            {
+                                <tr>
+                                    <td width="200"> @item.CustomerId</td>
+                                    <td width="200"> @item.CustomerName</td>
+                                    <td width="200"> @item.CustomerLevel</td>
+                                    <td width="200">
+                                        @if (item.CustomerLevel == "普通用户")
+                                        {
+                                            @Html.ActionLink("[  升级  ]", "UserLevelUpgrade", new { Id = item.CustomerId }) 
+
+                                        }
+                                        else if (item.CustomerLevel == "VIP3")
+                                        {
+                                            @Html.ActionLink("[  降级  ]", "UserLevelDowngrade", new { Id = item.CustomerId })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("[  升级  ]", "UserLevelUpgrade", new { Id = item.CustomerId }) 
+                                            @Html.ActionLink("| [  降级  ]", "UserLevelDowngrade", new { Id = item.CustomerId })
+                                        }
+                                        
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>没有数据</td>
+                                <td>没有数据</td>
+                                <td>没有数据</td>
+                                <td>无法执行</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br /><br />
+        </div>
+    </div>
+
+</body>
+</html>
