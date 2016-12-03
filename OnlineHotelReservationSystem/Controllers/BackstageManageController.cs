@@ -353,7 +353,10 @@ namespace OnlineHotelReservationSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("UserIndex");
         }
-
+        /// <summary>
+        /// 获取当前登录的管理员名称
+        /// </summary>
+        /// <returns></returns>
         public string GetSysAdminName()
         {
             var db = new HotelDatabase();
